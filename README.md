@@ -1,3 +1,5 @@
 # BENG 183
 
-Contains all relevant analysis of publicly available data in production of BENG 183 final presentation figures
+Data and scripts for final BENG 183 project
+
+Source data and study: https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE77460
