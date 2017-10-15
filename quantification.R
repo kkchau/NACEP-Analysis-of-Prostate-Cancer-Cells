@@ -31,7 +31,7 @@ geneLength <- function(genes) {
         } else {
             refseq <- entrez_summary(db='nuccore', id=refseq)
             lengths[[gene]] <- as.integer(refseq$slen)
-            print(sprintf("%s.%s", gene, lengths[[gene]]))
+            print(sprintf("%s.%s", gene, as.character(lengths[[gene]])))
         }
     }
     lengths <- lengths[!is.null(lengths)]        # skip discontinued/unfound genes
@@ -44,5 +44,7 @@ emp <- read.table(file="DATA/GSE77460_EMP-gene-count-matrix.tsv", header=T, sep=
 iprec <- read.table(file="DATA/GSE77460_iPrEC-gene-count-matrix.tsv", header=T, sep='\t', row.names=1)
 
 gene.lengths <- geneLength(row.names(emp))      # doesn't matter which table, all same genes
-emp.tpm <- calcTPM(emp, gene.lengths)
-iprec.tpm <- calcTPM(iprec, gene.lengths)
+gene.lengths <- gene.lengths[seq(from=1, to=10)]
+write(gene.lengths, file="GSEgeneLenths.txt", sep='\n')
+# emp.tpm <- calcTPM(emp, gene.lengths)
+# iprec.tpm <- calcTPM(iprec, gene.lengths)
