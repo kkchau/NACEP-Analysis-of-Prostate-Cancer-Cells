@@ -12,6 +12,7 @@ calcTPM <- function(counts, lengths) {
     # Note: TPM = ((count)/(length)) / sum_over_sample((count)/(length))
     tpm <- counts / lengths
     tpm <- sweep(counts, 2, colSums(counts), '/')
+    tpm <- tpm*(10**6)
     return(tpm)
 }
 

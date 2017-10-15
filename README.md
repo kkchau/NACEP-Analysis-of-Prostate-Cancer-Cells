@@ -9,4 +9,4 @@ Notes:
 * Read assignment with featureCounts, voom transformed
 * Original differential expression done with limma.
 
-R dependencies: ggplot2, splines
+R dependencies: rentrez
