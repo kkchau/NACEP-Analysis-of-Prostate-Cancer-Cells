@@ -1,27 +1,36 @@
-library(ggplot2)
+library(DESeq2); library(ggplot2)
 options(stringsAsFactors=F)
 
 
 SAVE_IMAGE = TRUE
 
 
-# load("genes_matrix_csv/BrainSpanExpressions.RData")
-# datExpr <- read.csv("genes_matrix_csv/expression_matrix.csv", header=F)[-1]
-# rownames(datExpr) <- read.csv("genes_matrix_csv/rows_metadata.csv", header=T)$ensembl_gene_id
-# colData <- read.csv("genes_matrix_csv/columns_metadata.csv", header=T)
-# rownames(colData) <- sprintf("%s|%s|%s", colData$donor_name, colData$age, colData$structure_acronym)
-# names(datExpr) <- rownames(colData)
+# load data
+datExpr <- read.csv(file="./DATA/GSE77460_allCount.csv", header=T, row.names=1)
+datMeta <- read.csv(file="./DATA/GSE_META.csv", header=T, row.names=1)
 
+# normalization
+datExpr <- vst(round(as.matrix(datExpr)))
 
-pca=prcomp(datExpr, scale=T, center=F)      # principal component analysis
+pca=prcomp(datExpr, scale=T, center=T)      # principal component analysis
 pcadata=data.frame(scale(pca$rotation))            
-pcadata$period <- colData$period[match(rownames(pcadata), rownames(colData))]
-pcadata$region <- colData$structure_acronym[match(rownames(pcadata), rownames(colData))]
+pcadata$Time <- datMeta$Age[match(row.names(pcadata), row.names(datMeta))]
+pcadata$Condition <- datMeta$Condition[match(row.names(pcadata), row.names(datMeta))]
 
 if (SAVE_IMAGE) {
-    png("brainSpanPCA_byPeriod.png", width=1920, height=1080)
+    png("samplePCA.png", width=1920, height=1080)
 }
-print(ggplot(pcadata) + geom_point(aes(PC1, PC2, col=period)) + ggtitle("Gene Sample PCA") + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_line(colour="black")))
+print(ggplot(pcadata) 
+      + geom_point(aes(PC1, PC2, col=Time, shape=Condition), size=10) 
+      + ggtitle("Sample PCA") 
+      + theme(text = element_text(size=60),
+              panel.grid.major = element_blank(), 
+              panel.grid.minor = element_blank(), 
+              panel.background = element_blank(), 
+              axis.line = element_line(colour="black"),
+              legend.key.size = unit(5, 'lines')
+              )
+      )
 if (SAVE_IMAGE) {
     dev.off()
 }
