@@ -17,27 +17,53 @@ calcTPM <- function(counts, lengths) {
 }
 
 
+# geneLength <- function(genes) {
+#     # Get gene lengths based on list of EntrezID
+#     # Input list of EntrezID
+#     # Returns list of gene lengths in order of EntrezID list
+#     # Note: Queries NCBI gene database for information using rentrez package
+#     
+#     lengths <- vector(mode='list', length=length(genes))
+#     names(lengths) <- as.character(genes)
+#     for (gene in names(lengths)) {
+#         refseq <- entrez_link(db='all', id=gene, dbfrom='gene')$links$gene_nuccore_refseqrna
+#         if (is.null(refseq)) {
+#             next
+#         } else {
+#             refseq <- entrez_summary(db='nuccore', id=refseq)
+#             lengths[[gene]] <- as.integer(refseq$slen)
+#             print(sprintf("%s.%s", gene, as.character(lengths[[gene]])))
+#         }
+#     }
+#     lengths <- lengths[!is.null(lengths)]        # skip discontinued/unfound genes
+# 
+#     return(lengths)
+# }
+
+
 geneLength <- function(genes) {
-    # Get gene lengths based on list of EntrezID
-    # Input list of EntrezID
-    # Returns list of gene lengths in order of EntrezID list
-    # Note: Queries NCBI gene database for information using rentrez package
-    
-    lengths <- vector(mode='list', length=length(genes))
-    names(lengths) <- as.character(genes)
-    for (gene in names(lengths)) {
-        refseq <- entrez_link(db='all', id=gene, dbfrom='gene')$links$gene_nuccore_refseqrna
-        if (is.null(refseq)) {
-            next
+    # Get gene lengths for given list of EntrezID
+    # Input: list of EntrezID
+    # Return: list of gene lengths in order of EntrezID list
+    # NOTE: Uses hg19 whole genome from bioconductor
+    library(Homo.sapiens)
+
+    gn.info <- genes(TxDb.Hsapiens.UCSC.hg19.knownGene)
+
+    gn.len <- vector(mode='list', length=length(genes))
+    names(gn.len) <- as.character(genes)
+    for (gene in names(gn.len)) {
+        print(gene)
+        this.length <- width(ranges(gn.info)[gn.info$gene_id==gene])
+        print(this.length)
+        if (length(this.length) == 0) {         # catch 0-length integer
+            gn.len[[gene]] <- 0
         } else {
-            refseq <- entrez_summary(db='nuccore', id=refseq)
-            lengths[[gene]] <- as.integer(refseq$slen)
-            print(sprintf("%s.%s", gene, as.character(lengths[[gene]])))
+            gn.len[[gene]] <- this.length
         }
     }
-    lengths <- lengths[!is.null(lengths)]        # skip discontinued/unfound genes
 
-    return(lengths)
+    return(gn.len)
 }
 
 
@@ -45,7 +71,6 @@ emp <- read.table(file="DATA/GSE77460_EMP-gene-count-matrix.tsv", header=T, sep=
 iprec <- read.table(file="DATA/GSE77460_iPrEC-gene-count-matrix.tsv", header=T, sep='\t', row.names=1)
 
 gene.lengths <- geneLength(row.names(emp))      # doesn't matter which table, all same genes
-gene.lengths <- gene.lengths[seq(from=1, to=10)]
-write(gene.lengths, file="GSEgeneLenths.txt", sep='\n')
+write.table(t(as.data.frame(gene.lengths)), file="GSEgeneLenths.txt", row.names=T, col.names=F, quote=F)
 # emp.tpm <- calcTPM(emp, gene.lengths)
 # iprec.tpm <- calcTPM(iprec, gene.lengths)
