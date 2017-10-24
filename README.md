@@ -32,4 +32,4 @@ R dependencies: splines
     srafile <- getSRAdbFile()       # downloads SRA database (SQLite)
     con <- dbConnect(RSQLite::SQLite(), srafile)
     listSRAfile("SRP069177", con)   # list runs for verification
-    getSRAfile("SRP069177", con, filetype="sra")    # download SRA files
+    getSRAfile("SRP069177", con, fileType="sra")    # download SRA files
