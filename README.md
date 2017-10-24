@@ -24,3 +24,12 @@ R dependencies: splines
 
 ### QUERYING NCBI FOR GENE UID
     esearch -db gene -query "<EntrezID> [UID] AND human [ORGN]" | efetch -format docsum | xtract -pattern GenomicInfoType -element ChrAccVer ChrStart ChrStop
+
+### SRA Study Download (R)
+    source("https://bioconductor.org/biocLite.R")
+    biocLite(c("DBI", "SRAdb"))
+    library(DBI); library(SRAdb)
+    srafile <- getSRAdbFile()       # downloads SRA database (SQLite)
+    con <- dbConnect(RSQLite::SQLite(), srafile)
+    listSRAfile("SRP069177", con)   # list runs for verification
+    getSRAfile("SRP069177", con, filetype="sra")    # download SRA files
