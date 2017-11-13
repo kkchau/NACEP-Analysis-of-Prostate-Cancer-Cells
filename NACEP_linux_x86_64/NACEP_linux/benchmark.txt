@@ -1,0 +1,36 @@
+Warning message:
+In dir.create(outputPath) : 'Result_2017-11-13' already exists
+
+real	0m0.667s
+user	0m0.421s
+sys	0m0.040s
+Warning message:
+In dir.create(outputPath) : 'Result_2017-11-13' already exists
+
+real	0m14.743s
+user	0m14.689s
+sys	0m0.038s
+Warning message:
+In dir.create(outputPath) : 'Result_2017-11-13' already exists
+
+real	5m51.449s
+user	5m51.578s
+sys	0m0.085s
+Warning message:
+In dir.create(outputPath) : 'Result_2017-11-13' already exists
+
+real	14m26.205s
+user	14m26.419s
+sys	0m0.124s
+Warning message:
+In dir.create(outputPath) : 'Result_2017-11-13' already exists
+
+real	21m46.421s
+user	21m46.718s
+sys	0m0.243s
+Warning message:
+In dir.create(outputPath) : 'Result_2017-11-13' already exists
+
+real	29m38.858s
+user	29m39.415s
+sys	0m0.295s
