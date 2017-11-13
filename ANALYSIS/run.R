@@ -14,4 +14,4 @@
 # alpha             Clustering strength (default=50)
 
 source("NACEP.r")
-NACEP("DATA.txt", 2, 18, 15, 500, 200, 100, 50)
+NACEP("dataFiltered.txt", 2, 18, 15, 300, 200, 100, 50)
