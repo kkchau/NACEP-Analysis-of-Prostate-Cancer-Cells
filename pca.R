@@ -7,7 +7,8 @@ SAVE_IMAGE = TRUE
 
 # load data
 # datExpr <- read.csv(file="./DATA/GSE77460_allCount.csv", header=T, row.names=1)
-datExpr <- read.table(file="./DATA/GSE77460_iPrEC-gene-count-matrix.tsv", header=T, row.names=1)
+# datExpr <- read.table(file="./DATA/GSE77460_iPrEC-gene-count-matrix.tsv", header=T, row.names=1)
+datExpr <- read.table(file="./ANALYSIS/dataFiltered.txt", header=T, row.names=1)
 datMeta <- read.csv(file="./DATA/GSE_META.csv", header=T, row.names=1)
 
 # normalization
