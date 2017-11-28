@@ -35,3 +35,15 @@ EMP_14day_03,Tumorigenic,14 day,R3
 EMP_17day_01,Tumorigenic,17 day,R1
 EMP_17day_02,Tumorigenic,17 day,R2
 EMP_17day_03,Tumorigenic,17 day,R3
+iPrEC_basal_average,Immortal,00 day,NA
+iPrEC_4day_average,Immortal,04 day,NA
+iPrEc_8day_average,Immortal,08 day,NA
+iPrEC_11day_average,Immortal,11 day,NA
+iPrEC_14day_average,Immortal,14 day,NA
+iPrEC_17day_average,Immortal,17 day,NA
+EMP_basal_average,Tumorigenic,00 day,NA
+EMP_4day_average,Tumorigenic,04 day,NA
+EMP_8day_average,Tumorigenic,08 day,NA
+EMP_11day_average,Tumorigenic,11 day,NA
+EMP_14day_average,Tumorigenic,14 day,NA
+EMP_17day_average,Tumorigenic,17 day,NA
