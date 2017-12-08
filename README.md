@@ -5,22 +5,16 @@ Data and scripts for final BENG 183 project
 Source data and study: Time-course differential expression of immortal prostate epithelial cells versus tumorigentic prostate epithelial cells 
 https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE77460
 
-R dependencies: splines
-
 ## Overall Process:
 
 1. Data downloaded from NCBI GEO into files "GSE77460_EMP-gene-count-matrix" and "GSE77460_iPrEC-gene-count-matrix"
-
 2. Gene lengths compiled using script "generateCoordinates.sh" and "discontinuedGeneLengths.py"
     - Employs NCBI E-UTILITIES
- 
 3. Conversion from count matrix to tpm matrix with "quantification.R"
- 
 4. Filtering performed with "DATA/filter/filterMethods.R"
     - expressionFilter params: expressionFilter(<filename>, 0.17, 39)
     - varianceFilter params: varianceFilter(<filename>, 2.4, T)
     - Output: "ANALYSIS/dataFilter.txt"
-  
 5. NACEP run: "run.sh" calls "run.R" which calls "NACEP.R"
     - Output: Distances.txt, sorted by statistical significance
 
