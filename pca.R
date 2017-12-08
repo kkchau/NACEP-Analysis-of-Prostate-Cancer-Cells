@@ -24,6 +24,13 @@ if (SAVE_IMAGE) {
 print(ggplot(pcadata) 
       + geom_point(aes(PC1, PC2, col=Time, shape=Condition), size=10) 
       + ggtitle("Sample PCA") 
+      + labs(x=paste("PC1 (", 
+                     as.character(summary(pca)$importance["Proportion of Variance", "PC1"] * 100),
+                     "% explained variance)", collapse=""),
+             y=paste("PC2 (", 
+                     as.character(summary(pca)$importance["Proportion of Variance", "PC2"] * 100),
+                     "% explained variance)", collapse="")
+             )
       + theme(text = element_text(size=60),
               panel.grid.major = element_blank(), 
               panel.grid.minor = element_blank(), 

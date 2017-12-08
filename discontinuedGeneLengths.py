@@ -1,24 +1,20 @@
+""" Scrape NCBI for missing gene lengths
+"""
 import requests
 from bs4 import BeautifulSoup
 
 
 missing_genes = [_.strip() for _ in open("DATA/missingGenesAll.txt", 'r').readlines()]
 
-
-skip = True
-skip_until_gene = '100507051'
 with open("DATA/missedGenes.scraped.tsv", 'a') as ofile:
     for gene in missing_genes:
         print(gene)
-        if gene == skip_until_gene:
-            skip = False
-        if skip:
-            continue
         url = "https://www.ncbi.nlm.nih.gov/gene/{}".format(gene)
         print(url)
         page = requests.get(url)
         soup = BeautifulSoup(page.text, 'html.parser')
 
+        # parse for gene length
         gContext = soup.find("table", class_="jig-ncbigrid")
         if gContext:
             gContext = gContext.find_all("td")
