@@ -1,9 +1,11 @@
-# BENG 183
+# NACEP Analysis of Tumorigenic prostate epithelial cells
+Written as a final project for BENG 183: "Applied Genomic Technologies"
 
-Data and scripts for final BENG 183 project
-
-Source data and study: Time-course differential expression of immortal prostate epithelial cells versus tumorigentic prostate epithelial cells 
+Source data and study: Time-course differential expression of immortal prostate epithelial cells versus tumorigentic prostate epithelial cells  
+Accessed via the NCBI Gene Expression Omnibus at:  
 https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE77460
+
+See "docs/final essay.pdf" for report. 
 
 ## Overall Process:
 
@@ -32,3 +34,6 @@ https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE77460
 ### QUERYING NCBI FOR GENE UID
     esearch -db gene -query "<EntrezID> [UID] AND human [ORGN]" | efetch -format docsum | xtract -pattern GenomicInfoType -element ChrAccVer ChrStart ChrStop
 
+## References
+1.  Huang, W., Cao, X., & Zhong, S. (2010). Network-based comparison of temporal gene expression patterns. Bioinformatics, 26(23), 2944–2951. http://doi.org/10.1093/bioinformatics/btq561
+2.  Berger, P. L., Winn, M. E., Miranti, C. K. (2016). Miz1, a Novel Target of ING4, Can Drive Prostate Luminal Epithelial Cell Differentiation. The Prostate. 77(1), 49-59. http://doi.org/10.1002/pros.23249
